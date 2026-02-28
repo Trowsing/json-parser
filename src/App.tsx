@@ -19,7 +19,7 @@ export default function App() {
       navigator.clipboard.writeText(formatted);
       setOutputCopied(true);
       setTimeout(() => setOutputCopied(false), 2000);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   useEffect(() => {
@@ -61,14 +61,14 @@ export default function App() {
     try {
       const formatted = JSON.stringify(JSON.parse(input), null, 2);
       setInput(formatted);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleMinify = () => {
     try {
       const minified = JSON.stringify(JSON.parse(input));
       setInput(minified);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleSortKeys = () => {
@@ -83,7 +83,7 @@ export default function App() {
       };
       const sorted = JSON.stringify(sortObj(JSON.parse(input)), null, 2);
       setInput(sorted);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   const handleDownload = () => {
@@ -105,7 +105,16 @@ export default function App() {
       <header className="sticky top-0 z-50 border-b border-neutral-200 dark:border-neutral-800 bg-white/80 dark:bg-[#0A0A0A]/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white">
+            <div
+              className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white transition-all duration-300 cursor-pointer"
+              style={{ boxShadow: 'none' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 10px #10b981, 0 0 20px #10b981, 0 0 40px #10b981, 0 0 60px #059669';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
               <Code2 size={20} />
             </div>
             <h1 className="font-semibold tracking-tight text-lg">JSON Parser</h1>
@@ -133,40 +142,40 @@ export default function App() {
             <div className="flex items-center justify-between">
               <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Raw Input</h2>
               <div className="flex items-center gap-1">
-                <button 
+                <button
                   onClick={handleFormat}
                   className="px-3 py-1 text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded transition-colors"
                 >
                   Format
                 </button>
-                <button 
+                <button
                   onClick={handleMinify}
                   className="px-3 py-1 text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded transition-colors"
                 >
                   Minify
                 </button>
-                <button 
+                <button
                   onClick={handleSortKeys}
                   className="px-3 py-1 text-xs font-medium hover:bg-neutral-200 dark:hover:bg-neutral-800 rounded transition-colors"
                 >
                   Sort
                 </button>
                 <div className="w-px h-4 bg-neutral-200 dark:bg-neutral-800 mx-1" />
-                <button 
+                <button
                   onClick={handleDownload}
                   className="p-1.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded transition-colors"
                   title="Download"
                 >
                   <Download size={16} />
                 </button>
-                <button 
+                <button
                   onClick={handleClear}
                   className="p-1.5 hover:bg-rose-50 dark:hover:bg-rose-900/20 text-neutral-400 hover:text-rose-500 rounded transition-colors"
                   title="Clear"
                 >
                   <Trash2 size={16} />
                 </button>
-                <button 
+                <button
                   onClick={handleCopy}
                   className="p-1.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded transition-colors"
                   title="Copy"
@@ -189,7 +198,7 @@ export default function App() {
               />
               <AnimatePresence>
                 {error && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
@@ -207,14 +216,14 @@ export default function App() {
             <div className="flex items-center justify-between">
               <h2 className="text-xs font-bold uppercase tracking-widest text-neutral-400">Parsed View</h2>
               <div className="flex items-center gap-1">
-                <button 
+                <button
                   onClick={handleCopyOutput}
                   className="p-1.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded transition-colors"
                   title="Copy Formatted"
                 >
                   {outputCopied ? <Check size={16} className="text-emerald-500" /> : <Copy size={16} />}
                 </button>
-                <button 
+                <button
                   onClick={() => setIsFullWidth(!isFullWidth)}
                   className="p-1.5 hover:bg-neutral-200 dark:hover:bg-neutral-800 text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 rounded transition-colors"
                   title={isFullWidth ? "Split View" : "Full View"}
@@ -244,14 +253,12 @@ export default function App() {
       <footer className="max-w-7xl mx-auto px-4 py-12 border-t border-neutral-200 dark:border-neutral-800">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2 text-neutral-400 text-sm">
-            <span className="font-mono">Lumina v1.0.0</span>
+            <span className="font-mono">JSON Parser v1.0.0</span>
             <span className="w-1 h-1 rounded-full bg-neutral-300 dark:bg-neutral-700" />
-            <span>Crafted for clarity</span>
+            <span>Your data never leaves your browser.</span>
           </div>
           <div className="flex items-center gap-6">
-            <a href="#" className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Documentation</a>
-            <a href="#" className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">GitHub</a>
-            <a href="#" className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">Privacy</a>
+            <a href="https://github.com/Trowsing/json-parser" className="text-sm text-neutral-500 hover:text-neutral-900 dark:hover:text-neutral-100 transition-colors">GitHub</a>
           </div>
         </div>
       </footer>
