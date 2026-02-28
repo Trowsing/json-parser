@@ -1,0 +1,5 @@
+{
+  "name": "JSON Parser",
+  "description": "A minimalist, high-performance JSON renderer and explorer with dark mode support.",
+  "requestFramePermissions": []
+}
